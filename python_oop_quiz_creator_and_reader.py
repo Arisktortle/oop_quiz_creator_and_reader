@@ -22,7 +22,15 @@ def user_questions(number):
         "choices": choices,
         "correct": correct_answer
     }     
-        
-#export the questions inputted into a file
+    
+def write_question_to_file(question_data, filename="quiz_data.txt"): #export the data of the questions inputted into a file
+    with open(filename, "a", encoding="utf-8") as f:
+        f.write(f"#QUESTION_{question_data['number']}_START\n")
+        f.write(f"Question {question_data['number']}: {question_data['question']}\n")
+        for opt in ['a', 'b', 'c', 'd']:
+            f.write(f"{opt}) {question_data['choices'][opt]}\n")
+        f.write(f"ANSWER: {question_data['correct']}\n")
+        f.write(f"#QUESTION_{question_data['number']}_END\n\n")
+
 #reads how many questions inputted
 #welcome menu for quiz and calls all three functions
