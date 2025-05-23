@@ -33,4 +33,13 @@ def write_question_to_file(question_data, filename="quiz_data.txt"): #export the
         f.write(f"#QUESTION_{question_data['number']}_END\n\n")
 
 #reads how many questions inputted
+def get_existing_question_count(filename="quiz_data.txt"):
+    try:
+        with open(filename, "r", encoding="utf-8") as f:
+            lines = f.readlines()
+        count = sum(1 for line in lines if line.strip().startswith("#QUESTION_") and "_START" in line) #reads the number of questions and stores the count
+        return count
+    except FileNotFoundError:
+        return 0
+    
 #welcome menu for quiz and calls all three functions
