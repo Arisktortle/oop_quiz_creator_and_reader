@@ -43,3 +43,28 @@ def get_existing_question_count(filename="quiz_data.txt"):
         return 0
     
 #welcome menu for quiz and calls all three functions
+def main():
+    print("Welcome to Quiz Creator Program!")
+
+    while True:
+        try:
+          number_of_questions = int(input("Enter how many questions to input: ")) #numbers of questions to be entered
+          if number_of_questions > 0: #checks if the value inputted is valid
+             break
+          else:
+            print("Enter a valid number greater than 0.") 
+        except ValueError: 
+            print("Invalid number input.")
+            
+    starting_number = get_existing_question_count() + 1
+
+    for i in range(number_of_questions):
+        question_number = starting_number + i
+        question_data = user_questions(question_number)
+        write_question_to_file(question_data)
+        print(f"\nInputted question {question_number} saved.\n")
+        
+    print(f"{number_of_questions} question(s) added and exported to file.\n")
+    
+if __name__ == "__main__":
+    main()
